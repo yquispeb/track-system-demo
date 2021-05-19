@@ -1,0 +1,27 @@
+<div>
+  <table class="table table-striped">
+    <caption>Lista de transacciones creadas</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Transaccion</th>
+        <th scope="col">Aplicacion</th>
+        <th scope="col">Torre</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaccion of listaTransacciones; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ transaccion.transaccionValor }}</td>
+          <td>{{ transaccion.aplicacionSeleccionada }}</td>
+          <td>{{ transaccion.torreValor }}</td>
+        </tr>
+        </tbody>
+  </table>
+<!--
+  <app-transaccion
+  *ngFor="let transaccion of listaTransacciones"
+  [transaccionElement]="transaccion"
+  >
+ </app-transaccion>-->
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col"></div>
+    <div class="col">
+      <h3>Registro de transacción</h3>
+    </div>
+    <div class="col"></div>
+  </div>
+  <form (ngSubmit)="onCrearTransaccion()" #form="ngForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01"
+            >Aplicación</label
+          >
+        </div>
+        <select
+          class="custom-select aplicacion-input"
+          id="inputGroupSelect01"
+          [(ngModel)]="aplicacionSeleccionada"
+          name="aplicacionSeleccionada"
+          required
+        >
+          <option selected>Selecciona...</option>
+          <option *ngFor="let aplicacion of listAplicaciones" [value]="aplicacion.nombreAplicacion">
+            {{ aplicacion.nombreAplicacion }}
+          </option>
+        </select>
+      </div>
+      <div class="row torre-input-div">
+        <label class="input-group-text" for="i-torre-registro-transaccion"
+          >Torre</label
+        >
+        <input
+          class="form-control torre-input"
+          id="i-torre-registro-transaccion"
+          type="text"
+          [(ngModel)]="torreValor"
+          name="torreValor"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row transaccion-input-div">
+        <label class="input-group-text" for="i-transaccion-registro-transaccion"
+          >Transacción</label
+        >
+        <input
+          class="form-control torre-input"
+          id="i-transaccion-registro-transaccion"
+          type="text"
+          [(ngModel)]="transaccionValor"
+          name="transaccionValor"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col btn-grabar-transaccion">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!form.valid"
+      >
+        Grabar Transacción
+      </button>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</form>
+</div>

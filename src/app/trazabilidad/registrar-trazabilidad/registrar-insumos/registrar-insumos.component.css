@@ -1,0 +1,38 @@
+.aplicacion-input-traz{
+    width: 52%;
+    margin-left: 88px;
+  }
+  .tipo-compont-input-traz{
+    width: 52%;
+    margin-left: 28px;
+  }
+  .codigo-proyecto-input{
+    width: 52%;
+    margin-left: 43px;
+  }
+  .traz-input-div{
+    margin-top: 20px
+  }
+  .traz-input{
+    width: 60%;
+    margin-left: 44px;
+  }
+  .btn-submit{
+    margin-top: 13px;
+    margin-left: 52px;
+  }
+  .traz-text-area{
+    margin-top: 14px;
+    width: 92%;
+  }
+
+.nombreComponente{
+  width: 45%;
+  margin-left: 43px;
+}
+.baseDatos{
+  margin-left: 116px;
+}
+.funcionalidad{
+  margin-left: 85px;
+}

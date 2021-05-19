@@ -1,0 +1,26 @@
+<div class="container">
+  <table class="table table-striped">
+    <caption>Lista de trazabilidades creadas</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Aplicación</th>
+        <th scope="col">Código de proyecto</th>
+        <th scope="col">Transacción</th>
+        <th scope="col">Fecha</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trazabilidad of listaTrazabilidades; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{  buscarAplicacionPorId(trazabilidad.aplicacion) }}</td>
+          <td>{{ trazabilidad.proyecto.codigo }}</td>
+          <td>{{ trazabilidad.transaccion }}</td>
+          <td>{{ transformToDate (trazabilidad.fechaCreacion)  | date:'medium' }}</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+
+

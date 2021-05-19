@@ -1,0 +1,28 @@
+.aplicacion-input{
+    width: 65%;
+    margin-left: 11px;
+  }
+  .torre-input-div{
+    margin-top: 20px
+  }
+  .torre-input{
+  width: 66%;
+  margin-left: 44px;
+  }
+  .btn-grabar-transaccion{
+    margin-top: 13px;
+    margin-left: 52px;
+  }
+  .aplicacion-usuario{
+    width: 53%;
+    margin-left: 44px;
+  }
+  .aplicacion-input{
+    width: 53%;
+    margin-left: 113px;
+  }
+  .div-aplicacion{
+    margin-top: 59px;
+  }
+  .div-torre{margin-top: 40px;
+  }

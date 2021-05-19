@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col"></div>
+    <div class="col">
+      <h3>Registro de trazabilidad</h3>
+    </div>
+    <div class="col"></div>
+  </div>
+  <form (ngSubmit)="onCreateTrazabilidad()" #form="ngForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="i-traz-aplicacion">Aplicación</label>
+          </div>
+          <select class="custom-select aplicacion-input-traz" 
+                  id="i-traz-aplicacion" 
+                  [(ngModel)]="nombreAplicacion"
+                  name="nombreAplicacion"
+                  (change)="getAplicacionForGetTransaccion()"
+                  required>
+            <option selected>Selecciona...</option>
+            <option *ngFor="let item of listAplicaciones"
+                    [value]="item.idAplicacion"
+                    >
+                    {{item.nombreAplicacion}}
+            </option>
+          </select>
+        </div>
+        <div class="row traz-input-div">
+          <label class="input-group-text" for="ex2">Código proyecto</label>
+          <input class="form-control traz-input" 
+                 id="ex2" 
+                 type="text" 
+                 ngModel
+                 name="codigoProyecto"
+                 required />
+        </div>
+        <div class="row traz-input-div">
+          <label class="input-group-text" for="ex2">Torre solicitante</label>
+          <input class="form-control traz-input" 
+                 id="ex2" 
+                 type="text" 
+                 ngModel
+                 name="torreValor"
+                 required/>
+        </div>
+        <div class="row traz-input-div">
+          <label class="input-group-text" for="ex2">Descripción de proyecto</label>
+          <textarea class="form-control traz-text-area"
+                    id="ex2" 
+                    rows="4" 
+                    ngModel
+                    name="descripcionProyecto"
+                    required></textarea>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Transacción</label>
+          </div>
+          <select class="custom-select aplicacion-input-traz"
+                  id="inputGroupSelect01"
+                  [(ngModel)]="transaccionSeleccionada"
+                  name="transaccionSeleccionada"
+                  required>
+            <option *ngFor="let transaccion of subListaTransacciones" 
+                    [value]="transaccion.transaccionValor">
+                      {{transaccion.transaccionValor}}
+            </option>
+          </select>
+        </div>
+        <div class="row traz-input-div">
+          <label class="input-group-text" 
+                 for="exampleFormControlTextarea1">Descripción del cambio en la transacción</label>
+          <textarea class="form-control traz-text-area" 
+                    id="exampleFormControlTextarea1" 
+                    rows="3"
+                    ngModel
+                    name="descripcionCambioTransaccion"
+                    required></textarea>
+        </div>
+        <div class="row traz-input-div custom-file">
+          <label class="custom-file-label" for="customFileLang">Adjuntar documentación</label>
+          <input type="file" 
+                 class="custom-file-input" 
+                 id="customFileLang" 
+                 lang="es"
+                 (change)="uploadFile($event)">
+          <div>{{ uploadPercent | async }}</div>
+          <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+          <progress max="100" [value]="(uploadPercent | async)"></progress>
+          <div class="result" *ngIf="downloadURL | async; let uploadSrc">
+            <a [href]="uploadSrc">You just uploaded this file!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col btn-grabar-transaccion">
+        <button type="submit" class="btn btn-primary" 
+        [disabled]="!form.valid">Grabar Trazabilidad</button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </form>
+</div>

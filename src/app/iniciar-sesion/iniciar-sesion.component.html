@@ -1,0 +1,50 @@
+<div class="container">
+    <form (ngSubmit)="onIniciarSesion()" #form="ngForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row torre-input-div">
+          <label class="input-group-text" for="i-torre-registro-transaccion"
+            >Usuario</label
+          >
+          <input
+            class="form-control torre-input"
+            id="i-torre-registro-transaccion"
+            type="text"
+            ngModel
+            name="usuario"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row torre-input-div">
+          <label class="input-group-text" for="i-transaccion-registro-transaccion"
+            >Contraseña</label
+          >
+          <input
+            class="form-control torre-input"
+            id="i-transaccion-registro-transaccion"
+            type="password"
+            ngModel
+            name="credencial"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col btn-grabar-transaccion">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!form.valid"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </form>
+  </div>
+  

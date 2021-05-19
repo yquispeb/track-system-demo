@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col"></div>
+        <div class="col">
+            <h3>Registro de Aplicación</h3>
+        </div>
+        <div class="col"></div>
+    </div>
+    <form (ngSubmit)="onCrearAplicacion()" #form="ngForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row div-aplicacion">
+                    <label class="input-group-text" for="aplicacionNombre">Aplicación</label>
+                    <input class="form-control aplicacion-input"
+                           id="aplicacionNombre" 
+                           type="text" 
+                           ngModel
+                           name="nombreAplicacion"
+                           required />
+                </div>
+                <div class="row torre-input-div">
+                    <label class="input-group-text" for="usuarioResponsable">Usuario responsable</label>
+                    <input class="form-control aplicacion-usuario" 
+                           id="usuarioResponsable" 
+                           type="text" 
+                           ngModel
+                           name="usuarioResponsable" 
+                           required/>
+                </div>
+            </div>
+            <div class="col-sm-6 div-torre">
+                <div class="row torre-input-div">
+                    <label class="input-group-text" for="torreValor">Torre</label>
+                    <input class="form-control torre-input"
+                           id="torreValor" 
+                           type="text" 
+                           ngModel
+                           name="torreValor"
+                           required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col btn-grabar-transaccion">
+                <button type="submit" 
+                        class="btn btn-primary" 
+                        [disabled]="!form.valid">
+                    Grabar Aplicación
+                </button>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </form>
+</div>
