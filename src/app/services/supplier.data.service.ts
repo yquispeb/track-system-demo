@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Aplicacion }  from '../model/aplicacion.model'
 
 
@@ -27,4 +28,7 @@ export class SupplierDataService {
     return this.enableUser;
   }
 
+  isEnabledObservable(): Observable<boolean>{
+    return of( this.enableUser);
+  }
 }

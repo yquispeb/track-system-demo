@@ -1,13 +1,16 @@
-<h3>Aplicaciones top</h3>
-<button class="btn-primary" (click)="mostrarTransacciones()">Mostrar</button>
-<div class="chart-wrapper" *ngIf="show">
-        <canvas baseChart
-                [datasets]="barChartData" 
-                [labels]="barChartLabels" 
-                [options]="barChartOptions"
-                 [plugins]="barChartPlugins" 
-                 [colors]="barChartColors" 
-                 [legend]="barChartLegend" 
-                 [chartType]="barChartType">
-        </canvas>
-</div>
+<ng-container>
+        <h3>Aplicaciones top</h3>
+        <div *ngIf="isLoading" style="text-align: center;">
+                <app-spinner></app-spinner>
+        </div>
+        <div class="chart-wrapper" *ngIf="show">
+                <canvas baseChart [datasets]="barChartData" 
+                        [labels]="barChartLabels" 
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins" 
+                        [colors]="barChartColors" 
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                </canvas>
+        </div>
+</ng-container>

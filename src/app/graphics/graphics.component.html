@@ -1,19 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6">
-            <h3>Torres top</h3>
-            <button class="btn-primary" (click)="mostrarTransacciones()">Mostrar</button>
-            <div class="chart-wrapper" *ngIf="show">
-                <canvas baseChart 
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [colors]="barChartColors"
-                [legend]="barChartLegend"
-                [chartType]="barChartType">
-              </canvas>
-            </div>
+            <app-graphics-torres></app-graphics-torres>
         </div>
         <div class="col-sm-6">
             <app-graphics-aplicacion></app-graphics-aplicacion>
@@ -26,15 +14,14 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <app-line-chart-trazabilidad-proyecto ></app-line-chart-trazabilidad-proyecto>
+           <app-line-chart-trazabilidad-transaccion></app-line-chart-trazabilidad-transaccion> 
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-           <app-line-chart-trazabilidad-transaccion></app-line-chart-trazabilidad-transaccion> 
+            <app-line-chart-trazabilidad-proyecto ></app-line-chart-trazabilidad-proyecto>
         </div>
     </div>
-    
 </div>
 
 

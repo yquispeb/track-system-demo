@@ -13,15 +13,13 @@ import { Transaccion } from '../transaccion/transaccion.model';
 export class GraphicsAplicacionComponent implements OnInit {
   listaTransacciones: Transaccion[];
   listaTorres: string[];
-  
+  isLoading:boolean =false;
 
-  constructor(private transaccionService:TransaccionService){
-
-  }
+  constructor(private transaccionService:TransaccionService){}
 
   ngOnInit(): void {
+    this.isLoading=true;
     this.cargarListaTransacciones();
-   
   }
 
   
@@ -33,6 +31,8 @@ export class GraphicsAplicacionComponent implements OnInit {
     ).subscribe(
       data => {
         this.listaTransacciones = data;
+        this. mostrarTransacciones();
+        this.isLoading=false;
       }
     );
   }

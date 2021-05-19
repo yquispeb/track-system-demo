@@ -1,29 +1,36 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { SupplierDataService } from '../services/supplier.data.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AutenticadorService } from '../services/autenticador.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit , OnDestroy{
   isCollapsed: boolean;
-  enableUser: boolean;
-  constructor(private supplierDataService: SupplierDataService) { }
+  isLogin: boolean= false;
+  constructor(private authService: AutenticadorService) { }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    this.enableUser=this.supplierDataService.isEnabled();
-  }
-
-
+  private userSubscription: Subscription
+  
   ngOnInit(): void {
+    this.isLogin=false;
     this.isCollapsed = true;
-  }
-
-  onLoadPage(){
-    this.isCollapsed = true;
+    this.userSubscription= this.authService.user.subscribe( user =>{
+      this.isLogin= !!user;
+    });
     
+    console.log(this.isLogin);
   }
   
+  onLoadPage() {
+    this.isCollapsed = true;
+  }
 
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
+  
+  
 }

@@ -1,1 +1,28 @@
-<p>listar-aplicaciones works!</p>
+<div class="container">
+    <table class="table table-dark">
+      <caption>Lista de transacciones creadas</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Aplicación</th>
+          <th scope="col">Torre</th>
+          <th scope="col">Usuario Responsable</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let aplicacion of listaAplicacion; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ aplicacion.nombreAplicacion }}</td>
+            <td>{{ aplicacion.torreValor }}</td>
+            <td>{{ aplicacion.usuarioResponsable }}</td>
+          </tr>
+          </tbody>
+    </table>
+  <!--
+    <app-transaccion
+    *ngFor="let transaccion of listaTransacciones"
+    [transaccionElement]="transaccion"
+    >
+   </app-transaccion>-->
+  </div>
+  

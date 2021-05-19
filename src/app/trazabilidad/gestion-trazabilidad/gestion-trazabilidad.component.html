@@ -118,8 +118,9 @@
                 <tr *ngFor="let documento of trazabilidadForModal.documentacion; index as i">
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ documento.nombreDocumento }}</td>
+                  <!--
                   <td *ngIf="profileUrl | async; let url">
-                      <a [href]="url | async" target="_blank">Download Me!</a></td>
+                      <a [href]="url | async" target="_blank">Download Me!</a></td>-->
                 </tr>
               </tbody>
           </table>

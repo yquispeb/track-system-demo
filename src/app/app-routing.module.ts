@@ -12,6 +12,7 @@ import { AplicacionComponent } from './aplicacion/aplicacion.component';
 import { ListarAplicacionesComponent } from './aplicacion/listar-aplicaciones/listar-aplicaciones.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { GraphicsComponent } from './graphics/graphics.component';
+import { InicioComponentComponent } from './inicio-component/inicio-component.component';
 
 const routes: Routes = [
   { path:'registarTansaccion', component:RegistrarTransaccionComponent},
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path:'listarAplicaciones', component:ListarAplicacionesComponent},
   { path:'iniciarSesion', component:IniciarSesionComponent},
   { path:'graphics', component:GraphicsComponent},
+  { path:'home', component:InicioComponentComponent},
+  { path:'', redirectTo: '/home', pathMatch: 'full'},
   
 ];
 

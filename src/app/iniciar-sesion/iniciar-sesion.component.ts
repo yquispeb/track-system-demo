@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SupplierDataService } from '../services/supplier.data.service';
+import { Router } from '@angular/router';
+import { AutenticadorService } from '../services/autenticador.service';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -10,23 +11,35 @@ import { SupplierDataService } from '../services/supplier.data.service';
 export class IniciarSesionComponent implements OnInit {
 
   @ViewChild('form', { static: false }) signupForm: NgForm;
-  usuario: any;
-  credencial: any;
-
-  constructor(private supplierDataService: SupplierDataService) { }
+  constructor(private authService: AutenticadorService, private router :Router) { }
 
   ngOnInit(): void {
   }
 
   onIniciarSesion(){
-    this.usuario= this.signupForm.value.usuario;
-    this.credencial= this.signupForm.value.credencial;
-    if (this.usuario==='admin' && this.credencial==='admin') {
-      this.supplierDataService.enableUser=true;
-    }else{
-      this.supplierDataService.enableUser=false;
-    }
-    this.signupForm.reset;
+    this.errorMessage=null;
+    const usuario= this.signupForm.value.usuario;
+    const credencial= this.signupForm.value.credencial;
+
+    this.isLoading=true;
+
+      this.authService.iniciarSesion(usuario, credencial).subscribe(
+        restData => {
+          console.log(restData);
+          this.isLoading=false;
+          this.router.navigate(['/graphics']);
+        },
+        error => {
+          console.log(error);
+          this.errorMessage=error;
+          this.isLoading=false;
+        }
+      );
+    
+    this.signupForm.reset();
   }
+
+  isLoading:boolean =false;
+  errorMessage: string=null;
 
 }

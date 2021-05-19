@@ -1,5 +1,6 @@
 import { TrazabiliadService } from './services/trazabilidad.service';
 import { SupplierDataService } from './services/supplier.data.service';
+import { AutenticadorService } from './services/autenticador.service';
 import { TransaccionComponent } from './transaccion/transaccion.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { ListarTrazabilidadesComponent } from './trazabilidad/listar-trazabilida
 import { RegistrarInsumosComponent } from './trazabilidad/registrar-trazabilidad/registrar-insumos/registrar-insumos.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import  {AngularFireAuthModule} from '@angular/fire/auth'
 import { environment } from 'src/environments/environment';
 import { GestionTrazabilidadComponent } from './trazabilidad/gestion-trazabilidad/gestion-trazabilidad.component';
 import { AplicacionComponent } from './aplicacion/aplicacion.component';
@@ -31,6 +33,11 @@ import { GraphicsAplicacionComponent } from './graphics-aplicacion/graphics-apli
 import { LineChartTrazabilidadComponent } from './graphics/line-chart-trazabilidad/line-chart-trazabilidad.component';
 import { LineChartTrazabilidadProyectoComponent } from './graphics/line-chart-trazabilidad-proyecto/line-chart-trazabilidad-proyecto.component';
 import { LineChartTrazabilidadTransaccionComponent } from './graphics/line-chart-trazabilidad-transaccion/line-chart-trazabilidad-transaccion.component';
+import { InicioComponentComponent } from './inicio-component/inicio-component.component';
+import { FooterComponent } from './footer/footer.component';
+import { SpinnerComponent } from './util/spinner.component';
+import { HttpClientModule } from '@angular/common/http';
+import { GraphicsTorresComponent } from './graphics/graphics-torres/graphics-torres.component';
 
 
 @NgModule({
@@ -54,7 +61,11 @@ import { LineChartTrazabilidadTransaccionComponent } from './graphics/line-chart
     GraphicsAplicacionComponent,
     LineChartTrazabilidadComponent,
     LineChartTrazabilidadProyectoComponent,
-    LineChartTrazabilidadTransaccionComponent
+    LineChartTrazabilidadTransaccionComponent,
+    InicioComponentComponent,
+    FooterComponent,
+    SpinnerComponent,
+    GraphicsTorresComponent
   ],
   imports: [
     BrowserModule,
@@ -63,12 +74,15 @@ import { LineChartTrazabilidadTransaccionComponent } from './graphics/line-chart
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    ChartsModule
+    AngularFireAuthModule,
+    ChartsModule,
+    HttpClientModule
   ],
   providers: [
     TransaccionService,
     SupplierDataService,
-    TrazabiliadService
+    TrazabiliadService,
+    AutenticadorService
   ],
   bootstrap: [AppComponent]
 })

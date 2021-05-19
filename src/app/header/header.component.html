@@ -1,57 +1,58 @@
-<nav
-  class="navbar navbar-expand-lg navbar-dark bg-dark"
-  style="background-color: #e3f2fd"
->
-  <a class="navbar-brand" [routerLink]="'.'">Track-system</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    (click)="isCollapsed = !isCollapsed"
-    [attr.aria-expanded]="!isCollapsed"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/iniciarSesion'" (click)="isCollapsed = true">Iniciar sesión</a>
-      </li>
-      <li class="nav-item" ngbDropdown >
-        <a class="nav-link dropdown-toggle"
-        (click)="isCollapsed = true"
-        [ngStyle]="{'cursor': 'pointer'}"
-        id="navbarDropdownAplicacion" ngbDropdownToggle>Aplicación</a>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdownAplicacion">
-          <a ngbDropdownItem [routerLink]="'/registarAplicaciones'" (click)="onLoadPage()">Registrar</a>
-          <a ngbDropdownItem [routerLink]="'/listarAplicaciones'" (click)="onLoadPage()">Ver todas</a>
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown >
-        <a class="nav-link dropdown-toggle"
-        (click)="isCollapsed = true"
-        [ngStyle]="{'cursor': 'pointer'}"
-        id="navbarDropdownTransaccion" ngbDropdownToggle >Transacciones</a>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdownTransaccion">
-          <a ngbDropdownItem [routerLink]="'/registarTansaccion'" (click)="onLoadPage()">Registrar</a>
-          <a ngbDropdownItem [routerLink]="'/listarTransacciones'" (click)="onLoadPage()">Ver todas</a>
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown >
-        <a class="nav-link dropdown-toggle"
-        (click)="isCollapsed = true"
-        [ngStyle]="{'cursor': 'pointer'}"
-        id="navbarDropdown" ngbDropdownToggle >Trazabilidad</a>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-          <a ngbDropdownItem [routerLink]="'/registrarTrazabilidad'" (click)="onLoadPage()">Registrar Trazabilidades</a>
-          <a ngbDropdownItem [routerLink]="'/registarInsumo'" (click)="onLoadPage()">Registrar Insumo</a>
-          <a ngbDropdownItem [routerLink]="'/listarTrazabilidades'" (click)="onLoadPage()">Ver todas</a>
-          <a ngbDropdownItem [routerLink]="'/gestionTrazabilidad'" (click)="onLoadPage()">Buscar Trazabilidades</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/graphics'" (click)="isCollapsed = true">Reportes</a>
-      </li>
-    </ul>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between" style="background-color: #e3f2fd">
+  <div class="container">
+    <div class="collapse navbar-collapse flex-1" [ngbCollapse]="isCollapsed">
+      <ul class="nav navbar-nav w-100">
+        <li class="nav-item" ngbDropdown *ngIf="isLogin">
+          <a class="nav-link dropdown-toggle" (click)="isCollapsed = true" [ngStyle]="{'cursor': 'pointer'}"
+            id="navbarDropdownAplicacion" ngbDropdownToggle>Aplicación</a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownAplicacion">
+            <a ngbDropdownItem [routerLink]="'/registarAplicaciones'" (click)="onLoadPage()">Registrar</a>
+            <a ngbDropdownItem [routerLink]="'/listarAplicaciones'" (click)="onLoadPage()">Ver todas</a>
+          </div>
+        </li>
+        <li class="nav-item" ngbDropdown *ngIf="isLogin">
+          <a class="nav-link dropdown-toggle" (click)="isCollapsed = true" [ngStyle]="{'cursor': 'pointer'}"
+            id="navbarDropdownTransaccion" ngbDropdownToggle>Transacciones</a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownTransaccion">
+            <a ngbDropdownItem [routerLink]="'/registarTansaccion'" (click)="onLoadPage()">Registrar</a>
+            <a ngbDropdownItem [routerLink]="'/listarTransacciones'" (click)="onLoadPage()">Ver todas</a>
+          </div>
+        </li>
+        <li class="nav-item" ngbDropdown *ngIf="isLogin">
+          <a class="nav-link dropdown-toggle" (click)="isCollapsed = true" [ngStyle]="{'cursor': 'pointer'}"
+            id="navbarDropdown" ngbDropdownToggle>Trazabilidad</a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+            <a ngbDropdownItem [routerLink]="'/registrarTrazabilidad'" (click)="onLoadPage()">Registrar
+              Trazabilidades</a>
+            <a ngbDropdownItem [routerLink]="'/registarInsumo'" (click)="onLoadPage()">Registrar Insumo</a>
+            <a ngbDropdownItem [routerLink]="'/listarTrazabilidades'" (click)="onLoadPage()">Ver todas</a>
+            <a ngbDropdownItem [routerLink]="'/gestionTrazabilidad'" (click)="onLoadPage()">Buscar Trazabilidades</a>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="isLogin">
+          <a class="nav-link" [routerLink]="'/graphics'" (click)="isCollapsed = true">Reportes</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLogin">
+          <a class="nav-link" [routerLink]="'/iniciarSesion'" (click)="isCollapsed = true">Iniciar sesión</a>
+        </li>
+      </ul>
+    </div>
+    <div class="order-first order-md-0 d-flex justify-content-center">
+      <a class="navbar-brand mx-0" [routerLink]="'.'">Track-system</a>
+   </div>
+    <div class="collapse navbar-collapse flex-1">
+      <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#">Ayuda</a>
+          </li>
+          <li class="nav-item" *ngIf="isLogin">
+            <a class="nav-link" [routerLink]="'/graphics'" (click)="isCollapsed = true">Cerrar Sesión</a>
+          </li>
+      </ul>
+  </div>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 </nav>

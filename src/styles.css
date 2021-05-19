@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+     background-color: #12232E;
+     background-image: url("https://www-growth.scdn.co/static/home/bursts.svg");
+     background-size: 175%;
+     background-position: 46% 4%;
+     -moz-box-pack: center;
+    justify-content: center;
+}
+html { 
+    background-color: #007CC7;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }

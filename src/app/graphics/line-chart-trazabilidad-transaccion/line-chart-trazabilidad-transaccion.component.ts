@@ -17,9 +17,11 @@ export class LineChartTrazabilidadTransaccionComponent implements OnInit {
   constructor(private trazabilidadService:TrazabiliadService) { }
 
   ngOnInit(): void {
+    this.isLoading=true;
     this.cargarListaTransacciones();
   }
 
+  isLoading:boolean =false;
   private cargarListaTransacciones() {
     this.trazabilidadService.getAll()
                            .snapshotChanges()
@@ -28,6 +30,8 @@ export class LineChartTrazabilidadTransaccionComponent implements OnInit {
     ).subscribe(
       data => {
         this.listaTrazabilidades = data;
+        this.mostrarTrazabilidades();
+        this.isLoading=false;
       }
     );
   }

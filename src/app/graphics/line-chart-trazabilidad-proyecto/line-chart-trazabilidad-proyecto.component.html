@@ -1,27 +1,20 @@
-<h3>Historial de trazabilidades </h3>
-<div class="container">
-    <label class="input-group-text" for="inputGroupSelect01">Transacción</label>
-    <select class="custom-select aplicacion-input-traz"
-            id="inputGroupSelect01"
-            [(ngModel)]="transaccionSeleccionada"
-            name="transaccionSeleccionada"
-            required>
-      <option *ngFor="let transaccion of listaTransacciones" 
-              [value]="transaccion.transaccionValor">
+<ng-container>
+    <h3>Historial de trazabilidades </h3>
+    <div class="container">
+        <label class="input-group-text" for="inputGroupSelect01">Transacción</label>
+        <select class="custom-select aplicacion-input-traz" id="inputGroupSelect01"
+            [(ngModel)]="transaccionSeleccionada" name="transaccionSeleccionada" required>
+            <option *ngFor="let transaccion of listaTransacciones" [value]="transaccion.transaccionValor">
                 {{transaccion.transaccionValor}}
-      </option>
-    </select>
-    <hr />
-    <button class="btn-primary" (click)="mostrarTrazabilidades()">Mostrar</button>
-</div>
-<div class="chart-wrapper" *ngIf="show">
-    <canvas baseChart 
-        [datasets]="lineChartData" 
-        [labels]="lineChartLabels" 
-        [options]="lineChartOptions"
-        [colors]="lineChartColors" 
-        [legend]="lineChartLegend" 
-        [chartType]="lineChartType" 
-        [plugins]="lineChartPlugins">
-    </canvas>
-</div>
+            </option>
+        </select>
+        <hr />
+        <button class="btn-primary" (click)="mostrarTrazabilidades()">Mostrar</button>
+    </div>
+    <div class="chart-wrapper" *ngIf="show">
+        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+</ng-container>

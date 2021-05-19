@@ -1,5 +1,14 @@
 <div class="container">
-    <form (ngSubmit)="onIniciarSesion()" #form="ngForm">
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    <p>{{errorMessage}}</p>
+  </div>
+
+   <div *ngIf="isLoading" style="text-align: center;">
+     <app-spinner></app-spinner>
+   </div>
+
+    <form (ngSubmit)="onIniciarSesion()" #form="ngForm" *ngIf="!isLoading">
     <div class="row">
       <div class="col-sm-6">
         <div class="row torre-input-div">

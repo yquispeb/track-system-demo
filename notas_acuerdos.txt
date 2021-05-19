@@ -1,0 +1,7 @@
+1- mejorar los perfiles
+perfil1_usuario_proceso:    { [RA,RTX,RTZ,CTZ]}
+perfil1_analista_funcional: { [RA,RTX,RTZ,CTZ]}
+
+
+2: en la vista  de transacciones:
+--mejorar el front :: cargar spinner y loader

@@ -1,43 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { TransaccionService } from 'src/app/services/transaccion.service';
+import { Transaccion } from 'src/app/transaccion/transaccion.model';
 import { Label,Color } from 'ng2-charts';
 import { map } from 'rxjs/operators';
-import { TransaccionService } from '../services/transaccion.service';
-import { Transaccion } from '../transaccion/transaccion.model';
 
 @Component({
-  selector: 'app-graphics',
-  templateUrl: './graphics.component.html',
-  styleUrls: ['./graphics.component.css']
+  selector: 'app-graphics-torres',
+  templateUrl: './graphics-torres.component.html',
+  styleUrls: ['./graphics-torres.component.css']
 })
-export class GraphicsComponent implements OnInit {
+export class GraphicsTorresComponent implements OnInit {
   listaTransacciones: Transaccion[];
-  listaTorres: string[];
-  transaccionSeleccionada:string='';
-  
-
-  constructor(private transaccionService:TransaccionService){
-
-  }
+  constructor(private transaccionService:TransaccionService) { }
 
   ngOnInit(): void {
-    this.cargarListaTransacciones();
-    this.mostrarTransacciones();
-   
+       this.isLoading=true;
+       this.cargarListaTransacciones();
   }
 
-  
+  isLoading:boolean =false;
   private cargarListaTransacciones() {
     this.transaccionService.getAll()
-                           .snapshotChanges()
-                           .pipe( map(changes => 
-                                changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
-    ).subscribe(
-      data => {
-        this.listaTransacciones = data;
-      }
-    );
+                            .snapshotChanges()
+                           .pipe( 
+                             map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
+                            ).subscribe(
+                            data => {
+                              this.listaTransacciones = data;
+                              this.mostrarTransacciones();
+                              this.isLoading =false;
+                            }
+                          );
   }
+
 
   mostrarTransacciones(){
     const firstMap= this.listaTransacciones.map(transaccion => transaccion.torreValor);
@@ -54,7 +50,6 @@ export class GraphicsComponent implements OnInit {
     ];
     this.show=true;
   }
-  
   barChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -62,9 +57,9 @@ export class GraphicsComponent implements OnInit {
     { backgroundColor: 'green' },
   ]
   barChartLabels: Label[] ;
-  barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  barChartData: ChartDataSets[] ;
   show:boolean=false;
+  barChartData: ChartDataSets[] ;
+  barChartType: ChartType = 'bar';
 }
