@@ -27,7 +27,7 @@ export class IniciarSesionComponent implements OnInit {
         restData => {
           console.log(restData);
           this.isLoading=false;
-          this.router.navigate(['/graphics']);
+          this.router.navigate(['/home']);
         },
         error => {
           console.log(error);

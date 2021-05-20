@@ -1,55 +1,45 @@
-<div class="container">
-    <div class="row align-items-start">
-        <div class="col"></div>
-        <div class="col">
-            <h3>Registro de Aplicación</h3>
-        </div>
-        <div class="col"></div>
-    </div>
+<div class="container login-dark reg-aplicacion">
     <form (ngSubmit)="onCrearAplicacion()" #form="ngForm">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row div-aplicacion">
-                    <label class="input-group-text" for="aplicacionNombre">Aplicación</label>
-                    <input class="form-control aplicacion-input"
-                           id="aplicacionNombre" 
-                           type="text" 
-                           ngModel
-                           name="nombreAplicacion"
-                           required />
-                </div>
-                <div class="row torre-input-div">
-                    <label class="input-group-text" for="usuarioResponsable">Usuario responsable</label>
-                    <input class="form-control aplicacion-usuario" 
-                           id="usuarioResponsable" 
-                           type="text" 
-                           ngModel
-                           name="usuarioResponsable" 
-                           required/>
-                </div>
-            </div>
-            <div class="col-sm-6 div-torre">
-                <div class="row torre-input-div">
-                    <label class="input-group-text" for="torreValor">Torre</label>
-                    <input class="form-control torre-input"
-                           id="torreValor" 
-                           type="text" 
-                           ngModel
-                           name="torreValor"
-                           required />
-                </div>
-            </div>
+        <h3 class="text-white">Registro de Aplicación</h3>
+        <br>
+        <div class="form-outline mb-4">
+          <input 
+             type="text" 
+             id="aplicacionNombre" 
+             class="form-control" 
+             ngModel
+             name="nombreAplicacion"
+             required
+             placeholder="Aplicación"/>
         </div>
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col btn-grabar-transaccion">
-                <button type="submit" 
-                        class="btn btn-primary" 
-                        [disabled]="!form.valid">
-                    Grabar Aplicación
-                </button>
-            </div>
-            <div class="col-4"></div>
+      
+        <div class="form-outline mb-4">
+          <input 
+             type="email" 
+             id="usuarioResponsable" 
+             class="form-control"
+             type="text"
+             ngModel
+             name="usuarioResponsable" 
+             required 
+             placeholder="Usuario responsable"/>
         </div>
-    </form>
+        
+        <div class="form-outline mb-4">
+            <input 
+               type="email" 
+               id="torreValor" 
+               class="form-control"
+               type="text"
+               ngModel
+               name="torreValor" 
+               required 
+               placeholder="Torre"/>
+          </div>
+        <!-- Submit button -->
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-block mb-4"
+          [disabled]="!form.valid">Guardar Aplicación </button>
+      </form>
 </div>

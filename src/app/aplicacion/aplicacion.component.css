@@ -26,3 +26,14 @@
   }
   .div-torre{margin-top: 40px;
   }
+  .login-dark {
+    height:450px;
+    /* background:#475d62 ;url(../../assets/candado.png) */
+     background:#475d62; 
+    background-size:cover;
+    position:relative;
+    padding-top: 25px;
+  }
+  .reg-aplicacion{
+    margin-top: 50px;
+  }
