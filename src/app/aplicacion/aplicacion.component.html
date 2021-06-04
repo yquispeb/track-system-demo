@@ -1,7 +1,7 @@
 <div class="container login-dark reg-aplicacion">
-  <form (ngSubmit)="onCrearAplicacion()" #form="ngForm">
-      <h3 class="text-white">Registro de Aplicación</h3>
-      <br>
+  <form (ngSubmit)="onCrearAplicacion()" #form="ngForm" *ngIf="!isLoading">
+      <h3 class="text-warning">Registro de Aplicación</h3>
+      <hr class="bg-white">
       <div class="form-outline mb-4">
         <input 
            type="text" 
@@ -42,4 +42,13 @@
         class="btn bg-info btn-block mb-4 text-white btn-grabar-aplicacion"
         [disabled]="!form.valid">Guardar Aplicación </button>
     </form>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      <p>{{errorMessage}}</p>
+    </div>
+    <div *ngIf="isLoadingSucces" class="alert alert-success">
+      <p>{{successMessage}}</p>
+    </div>
+    <div *ngIf="isLoading" style="text-align: center;">
+      <app-spinner></app-spinner>
+    </div>
 </div>

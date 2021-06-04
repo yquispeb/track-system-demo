@@ -5,6 +5,7 @@ import { TransaccionService } from 'src/app/services/transaccion.service';
 import { InsumoService } from 'src/app/services/insumo.service';
 import { map } from 'rxjs/operators';
 import { Aplicacion } from 'src/app/model/aplicacion.model';
+import { AplicacionService } from 'src/app/services/aplicacion.service';
 
 @Component({
   selector: 'app-registrar-insumos',
@@ -23,7 +24,7 @@ export class RegistrarInsumosComponent implements OnInit {
   };
   submitted = false;
 
-  codAplicacionDefault:string='1';
+  codAplicacionDefault:string='0';
   transaccionSeleccionada:string='';
   tipoComponente:string='';
   listAplicaciones:Aplicacion[];
@@ -58,15 +59,26 @@ export class RegistrarInsumosComponent implements OnInit {
   subListaTransacciones: any;
   constructor(private supplierData:SupplierDataService,
     private transaccionService:TransaccionService,
-    private insumoService: InsumoService) { }
+    private insumoService: InsumoService,
+    private aplicacionService: AplicacionService) { }
 
 
   ngOnInit(): void {
-    this.listAplicaciones=this.supplierData.listAplicaciones;
     this.cargarListaTransacciones();
-
+    this.cargarListaAplicaciones();
+    this.codAplicacionDefault='Selecciona...';
   }
-
+  private cargarListaAplicaciones() {
+    this.aplicacionService.getAll()
+                           .snapshotChanges()
+                           .pipe( map(changes => 
+                                changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
+    ).subscribe(
+      data => {
+        this.listAplicaciones = data;
+      }
+    );
+  }
   cargarListaTransacciones() {
     this.transaccionService.getAll().snapshotChanges().pipe(
       map(changes =>
@@ -76,7 +88,6 @@ export class RegistrarInsumosComponent implements OnInit {
       )
     ).subscribe(data => {
       this.listaTransacciones = data;
-      console.log('lista de aplicaciones cargada'+ this.listaTransacciones);
     });
   }
 
@@ -94,6 +105,8 @@ export class RegistrarInsumosComponent implements OnInit {
    this.listaComponentes=null;
   }
   agregarComponente(){
+    if (this.listaComponentes ==null ) this.listaComponentes =[];
+
     this.listaComponentes.push(
       {
         nombreComponente:this.signupForm.value.nombreComponente,
@@ -119,11 +132,17 @@ export class RegistrarInsumosComponent implements OnInit {
     this.tipoComponente='';
   }  
   getAplicacionForGetTransaccion(){
-    console.log("metodo lanzado para buscar transaccion de "+this.codAplicacionDefault)
-    console.log(this.listaTransacciones);
+    //console.log("metodo lanzado para buscar transaccion de "+this.codAplicacionDefault)
+    //console.log(this.listaTransacciones);
 
-    const nombreAplicacion=this.supplierData.buscarAplicacionPorId(this.codAplicacionDefault);
-    this.subListaTransacciones= this.listaTransacciones.filter(t => t.aplicacionSeleccionada ===nombreAplicacion);
-    console.log(this.subListaTransacciones);
+    //const nombreAplicacion=this.buscarAplicacionPorId(this.codAplicacionDefault);
+    this.subListaTransacciones= this.listaTransacciones.filter(t => t.aplicacionSeleccionada.key ===this.codAplicacionDefault);
+    //console.log(this.subListaTransacciones);
   }
+  buscarAplicacionPorId(idAplicacion:string):string{
+    return this.listAplicaciones
+               .find(
+                   app => app.idAplicacion === idAplicacion 
+                  ).nombreAplicacion;
+  }  
 }

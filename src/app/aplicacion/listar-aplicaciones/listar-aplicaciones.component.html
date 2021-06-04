@@ -1,28 +1,91 @@
 <div class="container  reg-aplicacion">
-    <table class="table table-striped table-dark">
-      <caption class="text-white">Lista de transacciones creadas</caption>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Aplicación</th>
-          <th scope="col">Torre</th>
-          <th scope="col">Usuario Responsable</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let aplicacion of listaAplicacion; index as i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ aplicacion.nombreAplicacion }}</td>
-            <td>{{ aplicacion.torreValor }}</td>
-            <td>{{ aplicacion.usuarioResponsable }}</td>
-          </tr>
-          </tbody>
-    </table>
+  <table class="table table-striped table-dark">
+    <caption class="text-white">Lista de transacciones creadas</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Aplicación</th>
+        <th scope="col">Torre</th>
+        <th scope="col">Usuario Responsable</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aplicacion of listaAplicacion; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ aplicacion.nombreAplicacion }}</td>
+        <td>{{ aplicacion.torreValor }}</td>
+        <td>{{ aplicacion.usuarioResponsable }}</td>
+        <td>
+          <button type="button" 
+                  class="btn btn-success m-button" 
+                  (click)="editDataAplicacion(content,aplicacion)">
+                  <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
   <!--
     <app-transaccion
     *ngFor="let transaccion of listaTransacciones"
     [transaccionElement]="transaccion"
     >
    </app-transaccion>-->
-  </div>
-  
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title text-primary" 
+          id="modal-basic-title">Editando Aplicación</h4>
+      <button type="button" 
+              class="close" 
+              aria-label="Close" 
+              (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="NombreAplicacionModal">Aplicación</label>
+          <input
+            type="text"
+            class="form-control"
+            id="NombreAplicacionModal"
+            [(ngModel)]="aplicacionForModal.nombreAplicacion"
+            name="NombreAplicacionModal"/>
+        </div>
+        <div class="form-group">
+          <label for="torreModal">Torre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="torreModal"
+            [(ngModel)]="aplicacionForModal.torreValor"
+            name="torreModal"/>
+        </div>
+        <div class="form-group">
+          <label for="usuarioResponsableModal">Usuario Responsable</label>
+          <input
+            type="text"
+            class="form-control"
+            id="usuarioResponsableModal"
+            [(ngModel)]="aplicacionForModal.usuarioResponsable"
+            name="usuarioResponsableModal"/>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" 
+              class="btn btn-success" 
+              (click)="actualizarAplicacion()">Actualizar</button>
+      <button type="button" 
+              class="btn btn-danger" 
+              (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+    <div class="p-3 mb-2 bg-success text-white text-center"
+         *ngIf="isSuccess">{{ message }}</div>
+  </ng-template>
+</div>

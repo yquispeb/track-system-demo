@@ -1,6 +1,6 @@
 export class Transaccion{
 
-  constructor(public aplicacionSeleccionada: string ,
+  constructor(public aplicacionSeleccionada: any ,
               public torreValor : string , 
               public transaccionValor: string){}
 }

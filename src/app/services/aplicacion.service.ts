@@ -20,4 +20,8 @@ export class AplicacionService {
   getAll() {
     return this.listaAplicacion;
   }
+  
+  update(key: string, value: any): Promise<void> {
+    return this.listaAplicacion.update(key, value);
+  }
 }

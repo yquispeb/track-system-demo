@@ -24,12 +24,22 @@ export class AplicacionComponent implements OnInit {
 
 
   onCrearAplicacion(){
+    this.isLoading=true;
     this.aplicacion.nombreAplicacion= this.signupForm.value.nombreAplicacion;
     this.aplicacion.usuarioResponsable= this.signupForm.value.usuarioResponsable;
     this.aplicacion.torreValor=this.signupForm.value.torreValor;
     this.aplicacionService.crearAplicacion(new Aplicacion('',this.aplicacion.nombreAplicacion,
     this.aplicacion.usuarioResponsable,this.aplicacion.torreValor));
     console.log(this.aplicacion);
+    this.isLoading=false;
+    this.isLoadingSucces=true;
+    this.successMessage="Aplicacion creada correctamente";
     this.signupForm.reset();
+
   }
+
+  isLoading:boolean =false;
+  isLoadingSucces:boolean =false;
+  errorMessage: string=null;
+  successMessage: string=null;
 }

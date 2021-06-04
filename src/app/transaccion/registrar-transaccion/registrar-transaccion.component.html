@@ -1,18 +1,18 @@
 <div class="container login-dark reg-transaccion">
   <form (ngSubmit)="onCrearTransaccion()" #form="ngForm">
-    <h3 class="text-white">Registro de Transacción</h3>
-    <br>
+    <h3 class="text-warning">Registro de Transacción</h3>
+    <hr class="bg-white">
     <div class="form-outline mb-4">
-      <label class="text-white" for="inputGroupSelect01">Aplicación</label>
+      <label class="text-white" 
+             for="inputGroupSelect01">Aplicación</label>
       <select
           class="custom-select aplicacion-input"
           id="inputGroupSelect01"
           [(ngModel)]="aplicacionSeleccionada"
           name="aplicacionSeleccionada"
-          placeholder="adsd"
           required>
-          <option selected disabled>Selecciona...</option>
-          <option *ngFor="let aplicacion of listAplicaciones" [value]="aplicacion.nombreAplicacion">
+          <option disabled>Selecciona...</option>
+          <option *ngFor="let aplicacion of listAplicaciones" [value]="aplicacion.key">
             {{ aplicacion.nombreAplicacion }}
           </option>
         </select>

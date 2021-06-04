@@ -1,20 +1,50 @@
 .aplicacion-input-traz{
-  width: 60%;
-  margin-left: 88px;
+  width: 66%;
+  margin-left: 60px;
 }
 .traz-input-div{
   margin-top: 20px
 }
+.cod-proy-input,.torre-input{
+display: inline-block;
+width: 66%;
+margin-left: 15px;
+}
+.torre-input{
+  margin-left: 18px;
+  }
+
 .traz-input{
   width: 60%;
   margin-left: 44px;
 }
 .btn-grabar-transaccion{
-  margin-top: 13px;
-  margin-left: 52px;
+  margin-top: -5px;
+  margin-left: 200px;
+  width: 67%;
 }
 .traz-text-area{
-  margin-top: 14px;
-  width: 92%;
+  display: inline-block;
+  margin-top: 5px;
+  width: 90%;
+  margin-left: 20px;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+.login-dark {
+  height:460px;
+  /* background:#475d62 ;url(../../assets/candado.png) */
+  background:#475d62; 
+  background-size:cover;
+  position:relative;
+  padding-top: 25px;
+}
+.reg-trazabilidad{
+  margin-top: 10px;
+  width: 80%;
+  height: 495px;
+}
+h3{
+  font-size: 1.05rem;
 }
 

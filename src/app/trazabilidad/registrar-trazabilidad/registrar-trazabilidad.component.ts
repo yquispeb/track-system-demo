@@ -8,6 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AplicacionService } from 'src/app/services/aplicacion.service';
 
 @Component({
   selector: 'app-registrar-trazabilidad',
@@ -17,6 +18,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class RegistrarTrazabilidadComponent implements OnInit {
   @ViewChild('form', { static: false }) signupForm: NgForm;
 
+  aplicacionSeleccionada='';
   nombreAplicacion = '';
   transaccionSeleccionada = '';
   listaTransacciones: any;
@@ -31,11 +33,13 @@ export class RegistrarTrazabilidadComponent implements OnInit {
     private transaccionService: TransaccionService,
     private trazabilidadService: TrazabiliadService,
     private uploadService:UploadService,
-    private storage: AngularFireStorage) {}
+    private storage: AngularFireStorage,
+    private aplicacionService: AplicacionService) {}
 
   ngOnInit(): void {
-    this.listAplicaciones = this.supplierDataService.listAplicaciones;
     this.cargarListaTransacciones();
+    this.cargarListaAplicaciones();
+    this.nombreAplicacion='Selecciona...'
   }
 
   private cargarListaTransacciones() {
@@ -46,7 +50,21 @@ export class RegistrarTrazabilidadComponent implements OnInit {
     ).subscribe(
       data => {
         this.listaTransacciones = data;
-        console.log(this.listaTransacciones);
+        //console.log(this.listaTransacciones);
+      }
+    );
+  }
+
+  private cargarListaAplicaciones() {
+    this.aplicacionService.getAll()
+                           .snapshotChanges()
+                           .pipe( map(changes => 
+                                changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
+    ).subscribe(
+      data => {
+        this.listAplicaciones = data;
+       // console.log('Lista de aplicaciones recibida: ');
+        //console.log(this.listAplicaciones);
       }
     );
   }
@@ -67,13 +85,21 @@ export class RegistrarTrazabilidadComponent implements OnInit {
   }
 
   getAplicacionForGetTransaccion(){
-    console.log("metodo lanzado para buscar transaccion de "+this.nombreAplicacion)
-    console.log(this.listaTransacciones);
-
-    const nombreAplicacion=this.supplierDataService.buscarAplicacionPorId(this.nombreAplicacion);
-    this.subListaTransacciones= this.listaTransacciones.filter(t => t.aplicacionSeleccionada ===nombreAplicacion);
-    console.log(this.subListaTransacciones);
+    //console.log("metodo lanzado para buscar transaccion de "+this.nombreAplicacion)
+    //console.log(this.listaTransacciones);
+    // const nombreAplicacion=this.supplierDataService.buscarAplicacionPorId(this.nombreAplicacion);
+    //const nombreAplicacion=this.buscarAplicacionPorId(this.nombreAplicacion);
+    this.subListaTransacciones= this.listaTransacciones.filter(t => t.aplicacionSeleccionada.key ===this.nombreAplicacion);
+    //console.log(this.subListaTransacciones);
   }
+
+  buscarAplicacionPorId(idAplicacion:string):string{
+    return this.listAplicaciones
+               .find(
+                   app => app.key === idAplicacion 
+                  ).nombreAplicacion;
+  } 
+
   uploadFile(event){
     //this.uploadService.uploadFile(event);
     //this.downloadURL=this.uploadService.downloadURL;

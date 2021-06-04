@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { from, interval, Subscription } from 'rxjs';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { AplicacionService } from 'src/app/services/aplicacion.service';
 
@@ -10,7 +10,13 @@ import { AplicacionService } from 'src/app/services/aplicacion.service';
 })
 export class ListarAplicacionesComponent implements OnInit, OnDestroy {
   listaAplicacion:any;
-  constructor(private aplicacionService:AplicacionService) { }
+  aplicacionForModal;
+  isSuccess:boolean=false;
+  constructor(private aplicacionService:AplicacionService,
+    private modalService: NgbModal) { }
+
+
+
   ngOnDestroy(): void {
     // this.tempOnSubscription.unsubscribe();
   }
@@ -25,7 +31,7 @@ export class ListarAplicacionesComponent implements OnInit, OnDestroy {
     //   error(err) {console.log('Error: '+ err);},
     //   complete(){console.log('Completed');}
     // });
-
+    this.message = '';
     this.cargarListaAplicaciones();
   }
 
@@ -40,5 +46,45 @@ export class ListarAplicacionesComponent implements OnInit, OnDestroy {
       }
     );
   }
+  closeResult = '';
+  editDataAplicacion(content, aplicacionSeleccionada){
+    this.aplicacionForModal=aplicacionSeleccionada;
 
+    this.modalService.open(content, 
+           {ariaLabelledBy: 'modal-basic-title'})
+        .result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+
+  }
+
+  actualizarAplicacion(){
+    const data = {
+      nombreAplicacion: this.aplicacionForModal.nombreAplicacion,
+      torreValor: this.aplicacionForModal.torreValor,
+      usuarioResponsable:this.aplicacionForModal.usuarioResponsable
+    };
+
+    if (this.aplicacionForModal.key) {
+      this.aplicacionService.update(this.aplicacionForModal.key, data)
+        .then(() =>{
+          this.message = 'La aplicacion se actualizó correctamente!'
+          this.isSuccess=true;
+        } )
+        .catch(err => console.log(err));
+    }
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  message = '';
 }
