@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { AplicacionService } from 'src/app/services/aplicacion.service';
 import { SupplierDataService } from 'src/app/services/supplier.data.service';
 import { TransaccionService } from 'src/app/services/transaccion.service';
@@ -19,6 +20,9 @@ export class RegistrarTransaccionComponent implements OnInit {
 
   listAplicaciones:any;
 
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  
   constructor(private registrarTransaccionService:TransaccionService,
               private supplierDataService: SupplierDataService,
               private aplicacionService: AplicacionService)
@@ -26,6 +30,15 @@ export class RegistrarTransaccionComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarListaAplicaciones();
+    this.cargarListaTransacciones();
+    this._success.subscribe(message => this.successMessage = message);
+    this._error.subscribe(message => this.errorMessage = message);
+    this._success.pipe(debounceTime(3500)).subscribe(() => {
+      this.isLoadingSucces=false;
+    });
+    this._error.pipe(debounceTime(3500)).subscribe(() => {
+      this.errorMessage=null;
+    });
   }
 
   private cargarListaAplicaciones() {
@@ -41,11 +54,26 @@ export class RegistrarTransaccionComponent implements OnInit {
   }
 
   onCrearTransaccion(){
-    
-   const aplicacion = this.listAplicaciones.find(app => app.key === this.aplicacionSeleccionada);
-     this.registrarTransaccionService.registrarTransaccion(
-          new Transaccion(aplicacion,this.torreValor,this.transaccionValor));
+    this.isLoading=true;
+    const aplicacion = this.listAplicaciones.find(app => app.key === this.aplicacionSeleccionada);
+
+    if (!this.transaccionExiste(this.transaccionValor)) {
+      this._error.next("Aplicacion "+ this.transaccionValor + " ya existe!")
+      this.isLoading=false;
+      return;
+    }
+
+    this.registrarTransaccionService.registrarTransaccion(
+          new Transaccion(aplicacion,this.torreValor,this.transaccionValor.toLocaleUpperCase()));
     this.cleanVariables();
+    this.isLoading=false;
+    this.isLoadingSucces=true;
+    this._success.next("Transaccion creada correctamente")
+  }
+  transaccionExiste(transaccionValor: string) {
+    const result  =this.listaTransacciones.find(aplicacion =>{aplicacion.transaccionValor.toLocaleUpperCase() === transaccionValor.toLocaleUpperCase()});
+    console.log("resultado de validacion de "+ transaccionValor + " --> " + result);
+    return result;
   }
 
 
@@ -53,5 +81,23 @@ export class RegistrarTransaccionComponent implements OnInit {
     this.aplicacionSeleccionada = '';
     this.torreValor = '';
     this.transaccionValor = '';
+  }
+
+  isLoading:boolean =false;
+  isLoadingSucces:boolean =false;
+  errorMessage: string=null;
+  successMessage: string=null;
+  listaTransacciones: Transaccion[];
+
+  private cargarListaTransacciones() {
+    this.registrarTransaccionService.getAll()
+                           .snapshotChanges()
+                           .pipe( map(changes => 
+                                changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
+    ).subscribe(
+      data => {
+        this.listaTransacciones = data;
+      }
+    );
   }
 }

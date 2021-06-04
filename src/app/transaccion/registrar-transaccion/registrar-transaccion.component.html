@@ -45,4 +45,14 @@
    class="btn bg-info btn-block text-white btn-grabar-transaccion"
    [disabled]="!form.valid">Guardar Transacción </button>
 </form>
+<br>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    <p>{{errorMessage}}</p>
+  </div>
+  <div *ngIf="isLoadingSucces" class="alert alert-success">
+    <p>{{successMessage}}</p>
+  </div> 
+  <div *ngIf="isLoading" style="text-align: center;">
+    <app-spinner></app-spinner>
+  </div>
 </div>

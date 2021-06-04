@@ -67,6 +67,8 @@ export class RegistrarInsumosComponent implements OnInit {
     this.cargarListaTransacciones();
     this.cargarListaAplicaciones();
     this.codAplicacionDefault='Selecciona...';
+    this.transaccionSeleccionada='Selecciona...';
+    this.tipoComponente='Selecciona...';
   }
   private cargarListaAplicaciones() {
     this.aplicacionService.getAll()

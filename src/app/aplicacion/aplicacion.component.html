@@ -47,8 +47,9 @@
     </div>
     <div *ngIf="isLoadingSucces" class="alert alert-success">
       <p>{{successMessage}}</p>
-    </div>
+    </div> 
     <div *ngIf="isLoading" style="text-align: center;">
       <app-spinner></app-spinner>
     </div>
+    <!-- <ngb-alert #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}</ngb-alert> -->
 </div>

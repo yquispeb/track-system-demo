@@ -44,7 +44,7 @@
               name="transaccion"
               (change)="getAplicacionForGetTransaccion()"
             required>
-            <option selected>Selecciona...</option>
+            <option selected disabled>Selecciona...</option>
             <option *ngFor="let transaccion of subListaTransacciones" [value]="transaccion.transaccionValor">
               {{ transaccion.transaccionValor }}
             </option>
@@ -59,6 +59,7 @@
               [(ngModel)]="tipoComponente"
               name="tipoComponente"
               >
+              <option selected disabled>Selecciona...</option>
               <option *ngFor="let tipComponente of listaTipoComponentes" [value]="tipComponente">
                 {{ tipComponente }}
               </option>

@@ -14,15 +14,19 @@
       <tr *ngFor="let aplicacion of listaAplicacion; index as i">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ aplicacion.nombreAplicacion }}</td>
-        <td>{{ aplicacion.torreValor }}</td>
+        <td>{{ aplicacion.torreValor }}</td>  
         <td>{{ aplicacion.usuarioResponsable }}</td>
         <td>
           <button type="button" 
                   class="btn btn-success m-button" 
                   (click)="editDataAplicacion(content,aplicacion)">
                   <i class="fas fa-edit"></i>
+                </button>
+          <button type="button"
+                  class="btn btn-danger"
+                  (click)="eliminarAplicacion(aplicacion)">
+                  <i class="far fa-trash-alt"></i>
           </button>
-          <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
         </td>
       </tr>
     </tbody>

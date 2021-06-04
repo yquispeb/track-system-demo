@@ -8,11 +8,12 @@ perfil1_analista_funcional: { [RA,RTX,RTZ,CTZ]}
 
 3- mejorar el registro de trazabilidades
 --validar los campos
---agregar service de apliacion 
 
-
---nueva opcion de menu: llamada Gestion--se debe mover la consulta de buscar trazabilidad [descartado]
 --logica para no agregar aplicacion con el mismo nombre de aplicacion
 --logica para no agregar 2 transacciones
 
 --CORREGIR PARA QUE AL ACTUALIZAR LA APLICACION, EL LA LISTA DE TRANSACCIONES SE ACTUALICE TAMBIEN
+--mensaje en el registro de transacciones
+--agregar validacion
+--registro trazabilidad --agregar selecciona en transaccion -- Selecciona
+--no permitir transacciones repetidas

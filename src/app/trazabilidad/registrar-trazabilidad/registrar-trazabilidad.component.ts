@@ -4,9 +4,9 @@ import { TransaccionService } from 'src/app/services/transaccion.service';
 import { TrazabiliadService } from 'src/app/services/trazabilidad.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Trazabilidad } from '../trazabilidad.model';
-import { finalize, map } from 'rxjs/operators';
+import { debounceTime, finalize, map } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AplicacionService } from 'src/app/services/aplicacion.service';
 
@@ -39,7 +39,12 @@ export class RegistrarTrazabilidadComponent implements OnInit {
   ngOnInit(): void {
     this.cargarListaTransacciones();
     this.cargarListaAplicaciones();
-    this.nombreAplicacion='Selecciona...'
+    this.nombreAplicacion='Selecciona...';
+    this.transaccionSeleccionada = 'Selecciona...';
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(debounceTime(3500)).subscribe(() => {
+      this.isLoadingSucces=false;
+    });
   }
 
   private cargarListaTransacciones() {
@@ -68,8 +73,10 @@ export class RegistrarTrazabilidadComponent implements OnInit {
       }
     );
   }
+  private _success = new Subject<string>();
 
   onCreateTrazabilidad(): void {
+    this.isLoading=true;
     var dateNow= new Date();
     this.trazabilidadService.crearTrazabilidad(
       new Trazabilidad(
@@ -82,6 +89,9 @@ export class RegistrarTrazabilidadComponent implements OnInit {
         dateNow.toISOString() )
     );
     this.signupForm.reset();
+    this.isLoading=false;
+    this.isLoadingSucces=true;
+    this._success.next("Trazabilidad creada correctamente!")
   }
 
   getAplicacionForGetTransaccion(){
@@ -123,4 +133,9 @@ export class RegistrarTrazabilidadComponent implements OnInit {
 
       this.listaDocumentacion.push({ nombreDocumento: this.nameOfFile , urlDocumento: filePath});
   }
+
+  isLoading:boolean =false;
+  isLoadingSucces:boolean =false;
+  errorMessage: string=null;
+  successMessage: string=null;
 }

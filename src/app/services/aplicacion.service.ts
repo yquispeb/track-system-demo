@@ -6,6 +6,7 @@ import { Aplicacion } from '../model/aplicacion.model';
   providedIn: 'root'
 })
 export class AplicacionService {
+
   private listaAplicacion: AngularFireList<Aplicacion> = null;
   private dbPath: string = 'listaAplicacion';
 
@@ -23,5 +24,9 @@ export class AplicacionService {
   
   update(key: string, value: any): Promise<void> {
     return this.listaAplicacion.update(key, value);
+  }
+
+  delete(key: string): Promise<void> {
+    return this.listaAplicacion.remove(key);
   }
 }
