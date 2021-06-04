@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { map } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { AplicacionService } from '../services/aplicacion.service';
 import { Aplicacion } from '../model/aplicacion.model';
 
@@ -10,7 +10,6 @@ import { Aplicacion } from '../model/aplicacion.model';
   styleUrls: ['./aplicacion.component.css']
 })
 export class AplicacionComponent implements OnInit {
-
   @ViewChild('form', { static: false }) signupForm: NgForm;
   constructor(private aplicacionService:AplicacionService) { }
 

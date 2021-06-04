@@ -12,9 +12,9 @@ export class ListarAplicacionesComponent implements OnInit, OnDestroy {
   listaAplicacion:any;
   constructor(private aplicacionService:AplicacionService) { }
   ngOnDestroy(): void {
-    this.tempOnSubscription.unsubscribe();
+    // this.tempOnSubscription.unsubscribe();
   }
-  private tempOnSubscription:Subscription;
+  // private tempOnSubscription:Subscription;
 
   ngOnInit(): void {
     //const data = from(fetch('/api/endpoint'));

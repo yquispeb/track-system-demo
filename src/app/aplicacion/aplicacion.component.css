@@ -9,9 +9,10 @@
   width: 66%;
   margin-left: 44px;
   }
-  .btn-grabar-transaccion{
-    margin-top: 13px;
+  .btn-grabar-aplicacion{
+    margin-top: 60px;
     margin-left: 52px;
+    width: 80%;
   }
   .aplicacion-usuario{
     width: 53%;
@@ -36,4 +37,5 @@
   }
   .reg-aplicacion{
     margin-top: 50px;
+    width: 50%;
   }

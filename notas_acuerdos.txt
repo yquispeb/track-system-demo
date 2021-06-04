@@ -14,3 +14,6 @@ perfil1_analista_funcional: { [RA,RTX,RTZ,CTZ]}
 --nueva opcion de menu: llamada 
 Gestion
 --se debe mover la consulta de buscar trazabilidad
+
+--logica para no agregar aplicacion con el mismo nombre de aplicacion
+--logica para no agregar 2 transacciones

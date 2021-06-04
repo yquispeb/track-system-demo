@@ -1,27 +1,24 @@
-<div class="container">
-
-  <div class="login-dark">
-      <form (ngSubmit)="onIniciarSesion()" #form="ngForm" *ngIf="!isLoading">
-        <h2 class="sr-only text-white">Login Form</h2>
-        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-        <div class="form-group">
-          <input class="form-control" id="i-torre-registro-transaccion" type="email" name="usuario" placeholder="Email"
-            ngModel required>
-        </div>
-        <div class="form-group">
-          <input class="form-control" id="i-transaccion-registro-transaccion" type="password" name="password"
-            placeholder="Password" ngModel name="credencial" required>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Log In</button>
-        </div>
-        <a href="#" class="forgot">Forgot your email or password?</a>
-      </form>
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        <p>{{errorMessage}}</p>
-      </div>
-      <div *ngIf="isLoading" style="text-align: center;">
-        <app-spinner></app-spinner>
-      </div>
+<div class="container login-dark ">
+  <form (ngSubmit)="onIniciarSesion()" #form="ngForm" *ngIf="!isLoading">
+    <h2 class="sr-only text-white">Login Form</h2>
+    <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+    <div class="form-group">
+      <input class="form-control" id="i-torre-registro-transaccion" type="email" name="usuario" placeholder="Email"
+        ngModel required>
     </div>
+    <div class="form-group">
+      <input class="form-control" id="i-transaccion-registro-transaccion" type="password" name="password"
+        placeholder="Password" ngModel name="credencial" required>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Log In</button>
+    </div>
+    <a href="#" class="forgot">Forgot your email or password?</a>
+  </form>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    <p>{{errorMessage}}</p>
+  </div>
+  <div *ngIf="isLoading" style="text-align: center;">
+    <app-spinner></app-spinner>
+  </div>
 </div>

@@ -25,7 +25,7 @@
             <a ngbDropdownItem [routerLink]="'/registrarTrazabilidad'" (click)="onLoadPage()">Registrar
               Trazabilidades</a>
             <a ngbDropdownItem [routerLink]="'/registarInsumo'" (click)="onLoadPage()">Registrar Insumo</a>
-            <a ngbDropdownItem [routerLink]="'/listarTrazabilidades'" (click)="onLoadPage()">Ver todas</a>
+            <!-- <a ngbDropdownItem [routerLink]="'/listarTrazabilidades'" (click)="onLoadPage()">Ver todas</a> -->
             <a ngbDropdownItem [routerLink]="'/gestionTrazabilidad'" (click)="onLoadPage()">Buscar Trazabilidades</a>
           </div>
         </li>
@@ -46,7 +46,7 @@
               <a class="nav-link" href="#">Ayuda</a>
           </li>
           <li class="nav-item" *ngIf="isLogin">
-            <a class="nav-link" [routerLink]="'/graphics'" (click)="isCollapsed = true">Cerrar Sesión</a>
+            <a class="nav-link" [routerLink]="'/home'" (click)="cerrarSesion()">Cerrar Sesión</a>
           </li>
       </ul>
   </div>

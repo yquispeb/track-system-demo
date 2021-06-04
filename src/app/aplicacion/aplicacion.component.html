@@ -1,45 +1,45 @@
 <div class="container login-dark reg-aplicacion">
-    <form (ngSubmit)="onCrearAplicacion()" #form="ngForm">
-        <h3 class="text-white">Registro de Aplicación</h3>
-        <br>
-        <div class="form-outline mb-4">
-          <input 
-             type="text" 
-             id="aplicacionNombre" 
-             class="form-control" 
-             ngModel
-             name="nombreAplicacion"
-             required
-             placeholder="Aplicación"/>
-        </div>
+  <form (ngSubmit)="onCrearAplicacion()" #form="ngForm">
+      <h3 class="text-white">Registro de Aplicación</h3>
+      <br>
+      <div class="form-outline mb-4">
+        <input 
+           type="text" 
+           id="aplicacionNombre" 
+           class="form-control" 
+           ngModel
+           name="nombreAplicacion"
+           required
+           placeholder="Aplicación"/>
+      </div>
+    
+      <div class="form-outline mb-4">
+        <input 
+           type="email" 
+           id="usuarioResponsable" 
+           class="form-control"
+           type="text"
+           ngModel
+           name="usuarioResponsable" 
+           required 
+           placeholder="Usuario responsable"/>
+      </div>
       
-        <div class="form-outline mb-4">
+      <div class="form-outline mb-4">
           <input 
              type="email" 
-             id="usuarioResponsable" 
+             id="torreValor" 
              class="form-control"
              type="text"
              ngModel
-             name="usuarioResponsable" 
+             name="torreValor" 
              required 
-             placeholder="Usuario responsable"/>
+             placeholder="Torre"/>
         </div>
-        
-        <div class="form-outline mb-4">
-            <input 
-               type="email" 
-               id="torreValor" 
-               class="form-control"
-               type="text"
-               ngModel
-               name="torreValor" 
-               required 
-               placeholder="Torre"/>
-          </div>
-        <!-- Submit button -->
-        <button 
-          type="submit" 
-          class="btn btn-primary btn-block mb-4"
-          [disabled]="!form.valid">Guardar Aplicación </button>
-      </form>
+      <!-- Submit button -->
+      <button 
+        type="submit" 
+        class="btn bg-info btn-block mb-4 text-white btn-grabar-aplicacion"
+        [disabled]="!form.valid">Guardar Aplicación </button>
+    </form>
 </div>

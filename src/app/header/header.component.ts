@@ -31,6 +31,9 @@ export class HeaderComponent implements OnInit , OnDestroy{
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
   }
-  
+  cerrarSesion(){
+    this.isCollapsed = true;
+    this.isLogin=false;
+  }
   
 }
