@@ -58,7 +58,7 @@ export class RegistrarTransaccionComponent implements OnInit {
     const aplicacion = this.listAplicaciones.find(app => app.key === this.aplicacionSeleccionada);
 
     if (!this.transaccionExiste(this.transaccionValor)) {
-      this._error.next("Aplicacion "+ this.transaccionValor + " ya existe!")
+      this._error.next("Transaccion "+ this.transaccionValor + " ya existe!")
       this.isLoading=false;
       return;
     }
@@ -72,7 +72,7 @@ export class RegistrarTransaccionComponent implements OnInit {
   }
   transaccionExiste(transaccionValor: string) {
     const result  =this.listaTransacciones.find(aplicacion =>{aplicacion.transaccionValor.toLocaleUpperCase() === transaccionValor.toLocaleUpperCase()});
-    console.log("resultado de validacion de "+ transaccionValor + " --> " + result);
+    //console.log("resultado de validacion de "+ transaccionValor + " --> " + result);
     return result;
   }
 

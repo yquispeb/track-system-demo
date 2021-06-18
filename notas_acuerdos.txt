@@ -17,3 +17,9 @@ perfil1_analista_funcional: { [RA,RTX,RTZ,CTZ]}
 --agregar validacion
 --registro trazabilidad --agregar selecciona en transaccion -- Selecciona
 --no permitir transacciones repetidas
+
+--enlace con repo para subida de archivos a firebase con angular:
+https://bezkoder.com/angular-11-file-upload-firebase-storage/
+
+repositorio github
+https://github1s.com/bezkoder/angular-11-firebase-storage 

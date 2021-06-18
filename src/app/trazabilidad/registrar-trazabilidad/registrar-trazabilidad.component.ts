@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AplicacionService } from 'src/app/services/aplicacion.service';
+import { FileUpload } from 'src/app/model/file-upload';
 
 @Component({
   selector: 'app-registrar-trazabilidad',
@@ -78,6 +79,7 @@ export class RegistrarTrazabilidadComponent implements OnInit {
   onCreateTrazabilidad(): void {
     this.isLoading=true;
     var dateNow= new Date();
+    this.upload()
     this.trazabilidadService.crearTrazabilidad(
       new Trazabilidad(
         this.nombreAplicacion, 
@@ -109,6 +111,11 @@ export class RegistrarTrazabilidadComponent implements OnInit {
                    app => app.key === idAplicacion 
                   ).nombreAplicacion;
   } 
+  
+  selectedFiles?: FileList;
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
+  }
 
   uploadFile(event){
     //this.uploadService.uploadFile(event);
@@ -134,6 +141,31 @@ export class RegistrarTrazabilidadComponent implements OnInit {
       this.listaDocumentacion.push({ nombreDocumento: this.nameOfFile , urlDocumento: filePath});
   }
 
+  upload(): void {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+
+      if (file) {
+        this.currentFileUpload = new FileUpload(file);
+        this.nameOfFile=file.name;
+        const filePath = '/upload/documents/'+this.nameOfFile;
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage ? percentage : 0);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+        this.listaDocumentacion.push({ nombreDocumento: this.nameOfFile , urlDocumento: filePath});
+      }
+    }
+
+  }
+
+  percentage = 0;
+  currentFileUpload?: FileUpload;
   isLoading:boolean =false;
   isLoadingSucces:boolean =false;
   errorMessage: string=null;
